@@ -24,6 +24,24 @@ function findMedian(list) {
     }
 }
 
+function findMode(list) {
+    const map = new Map();
+    let maxFreq = 0;
+    let mode;
+    for (let num of list) {
+        let freq = map.has(num) ? map.get(num) : 0;
+        freq++;
+
+        if (freq > maxFreq) {
+            maxFreq = freq;
+            mode = num;
+        }
+        map.set(num, freq);
+    }
+    return mode;
+}
+
 module.exports = {
-    findMean: findMean, 
-    findMedian: findMedian}
+    findMean, 
+    findMedian,
+    findMode}

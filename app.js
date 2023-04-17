@@ -24,6 +24,16 @@ app.get('/median', (req, res, next) => {
     });
 })
 
+app.get('/mode', (req, res, next) => {
+    list = req.query.nums.split(",").map(Number)
+    mode = math.findMode(list);
+    return res.json({
+        response: {
+            operation: "mode", 
+            value: `${mode}`}
+    });
+})
+
 app.listen(3000, () => {
     console.log("Server running on port 3000");
 })
