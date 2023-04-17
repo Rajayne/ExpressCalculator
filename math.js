@@ -1,12 +1,11 @@
 function findMean(list) {
+    let len = list.length;
     let sum = 0;
-    let count = 0;
-    for (let i = 0; i < list.length; i++) {
-        sum += list[i];
-        count++;
+    for (let i = 0; i < len; i++) {
+        sum += list[i]
     }
-    mean = sum/count;
-    return mean;
+    mean = sum/len;
+    return mean.toFixed(2);
 }
 
 function findMedian(list) {

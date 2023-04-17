@@ -10,7 +10,7 @@ app.get('/mean', (req, res, next) => {
         list = req.query.nums.split(",").map(Number)
         mean = math.findMean(list);
         if (!mean) {
-            throw new ExpressError("Invalid Integer", 403)
+            throw new ExpressError("Invalid Integer", 400)
         }
         return res.json({
             response: {
@@ -27,7 +27,7 @@ app.get('/median', (req, res, next) => {
         list = req.query.nums.split(",").map(Number)
         median = math.findMedian(list);
         if (!median) {
-            throw new ExpressError("Invalid Integer", 403)
+            throw new ExpressError("Invalid Integer", 400)
         }
         return res.json({
             response: {
@@ -44,7 +44,7 @@ app.get('/mode', (req, res, next) => {
         list = req.query.nums.split(",").map(Number)
         mode = math.findMode(list);
         if (!mode) {
-            throw new ExpressError("Invalid Integer", 403)
+            throw new ExpressError("Invalid Integer", 400)
         }
         return res.json({
             response: {
@@ -52,6 +52,29 @@ app.get('/mode', (req, res, next) => {
                 value: `${mode}`}
         });
     } catch (e) {
+        next(e);
+    }
+})
+
+app.get('/all', (req, res, next) => {
+    try {
+        list = req.query.nums.split(",").map(Number)
+        let mean = math.findMean(list);
+        let median = math.findMedian(list);
+        let mode = math.findMode(list);
+        if (!mean || !median || !mode) {
+            throw new ExpressError("Invalid Integer", 400);
+        }
+        return res.json({
+            response: {
+                operation: "all",
+                mean: `${mean}`,
+                median: `${median}`,
+                mode: `${mode}`
+            }
+        });
+    }
+    catch (e) {
         next(e);
     }
 })
